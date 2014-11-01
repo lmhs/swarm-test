@@ -11,41 +11,48 @@ var Mouse = Swarm.Model.extend('Mouse', {
 
 module.exports = Mouse; // CommonJS
 },{"swarm":5}],2:[function(require,module,exports){
-var Swarm = require('swarm');
-var Mouse = require('./Mouse.js');
-var Text = require('swarm/lib/Text');
+window.onload = function() {
+	var Swarm = require('swarm');
+	var Mouse = require('./Mouse.js');
+	var Text = require('swarm/lib/Text');
 
-// 1. create local Host
-var swarmHost = new Swarm.Host('4');
+	var textArea = document.getElementById('text');
 
-// 2. connect to your server
-swarmHost.connect('ws://80.240.136.40:8000');
+	function listenText() {
+		textArea.value = text.text;
+	}
 
-// 3.a. create an object
-var someMouse = new Mouse();
-// OR swarmHost.get('/Mouse');
-// OR new Mouse({x:1, y:2});
+	// 1. create local Host
+	var swarmHost = new Swarm.Host('5');
 
-// 4.a. a locally created object may be touched immediately
-// someMouse.set({x:1,y:2});
+	// 2. connect to your server
+	swarmHost.connect('ws://80.240.136.40:8000');
 
-// 3.b. This object is global (we supply a certain id) so we
-// may need to wait for its state to arrive from the server
-var mickey = new Mouse('Mickey');
-window.text = new Text('Text1');
+	// 3.a. create an object
+	var someMouse = new Mouse();
+	// OR swarmHost.get('/Mouse');
+	// OR new Mouse({x:1, y:2});
 
-text.on('init', function() {
-	
-})
+	// 4.a. a locally created object may be touched immediately
+	// someMouse.set({x:1,y:2});
 
-text.on(function(spec, val, source) {
-	console.log('****************START EVENT********************');
-	console.log('event: ', spec.op(), val);
-	console.log('****************TEXT********************');
-  console.log(text);
-  console.log('****************SOURCE********************');
-  console.log(source);
-})
+	// 3.b. This object is global (we supply a certain id) so we
+	// may need to wait for its state to arrive from the server
+	var mickey = new Mouse('Mickey');
+	window.text = new Text('Text1');
+
+	text.on('init', listenText);
+
+	text.on(function(spec, val, source) {
+		console.log('****************START EVENT********************');
+		console.log('event: ', spec.op(), val);
+		console.log('****************TEXT********************');
+	  console.log(text);
+	  console.log('****************SOURCE********************');
+	  console.log(source);
+	  listenText();
+	})
+}
 
 // // 4.b. ...wait for the state to arrive
 // mickey.on('init', function () {
