@@ -1,0 +1,64 @@
+{"":
+{
+  "/Mouse#Mickey": {
+    "!1_M3I02+unique_client_id.set": {},
+    "!1_M9102+1.set": {
+      "x": 3,
+      "y": 4
+    },
+    "!1_M9902+2.set": {
+      "x": 3,
+      "y": 4
+    },
+    "!1_M9h02+1.set": {
+      "x": 3,
+      "y": 4
+    },
+    "!1_M9s02+2.set": {
+      "x": 9,
+      "y": 9
+    },
+    "!1_MBW02+2.set": {
+      "x": 9,
+      "y": 9
+    },
+    "!1_MCP02+1.set": {
+      "x": 3,
+      "y": 4
+    },
+    "!1_MKC02+1.set": {
+      "x": 3,
+      "y": 4
+    },
+    "!1_ML302+2.set": {
+      "x": 9,
+      "y": 9
+    },
+    "!1_MQm03+1.set": {
+      "x": 3,
+      "y": 4
+    }
+  },
+  "/Text#Text1": {
+    "!1_MQm04+1.insert": {
+      "00000+swarm": "Hello"
+    }
+  }
+},
+"/Text#Text1!1_MUA03+2.remove":	{"1_MQm05+1":true,"1_MQm06+1":true,"1_MQm07+1":true,"1_MQm08+1":true},
+"/Text#Text1!1_MUA04+2.insert":	{"1_MQm04+1":"olla from 2"},
+"/Text#Text1!1_MVr03+3.remove":	{"1_MUA0E+2":true},
+"/Text#Text1!1_MVr04+3.insert":	{"1_MUA0D+2":"3"},
+"/Text#Text1!1_MkW+3.remove":	{"1_MUA04+2":true,"1_MUA05+2":true,"1_MUA06+2":true,"1_MUA07+2":true,"1_MUA08+2":true,"1_MUA09+2":true,"1_MUA0A+2":true,"1_MUA0B+2":true,"1_MUA0C+2":true,"1_MUA0D+2":true,"1_MVr04+3":true},
+"/Text#Text1!1_MkW01+3.insert":	{"1_MQm04+1":"ALLO"},
+"/Text#Text1!1_Mnj03+3.remove":	{"1_MkW01+3":true,"1_MkW02+3":true,"1_MkW03+3":true,"1_MkW04+3":true},
+"/Text#Text1!1_Mnj04+3.insert":	{"1_MQm04+1":"olla from 3"},
+"/Text#Text1!1_Mo_+3.remove":	{"1_MQm04+1":true,"1_Mnj04+3":true,"1_Mnj05+3":true,"1_Mnj06+3":true,"1_Mnj07+3":true,"1_Mnj08+3":true,"1_Mnj09+3":true,"1_Mnj0A+3":true,"1_Mnj0B+3":true,"1_Mnj0C+3":true,"1_Mnj0D+3":true,"1_Mnj0E+3":true},
+"/Text#Text1!1_Mo_01+3.insert":	{"00000+swarm":"JJJ"},
+"/Text#Text1!1_MpV03+3.remove":	{"1_Mo_01+3":true,"1_Mo_02+3":true,"1_Mo_03+3":true},
+"/Text#Text1!1_MpV04+3.insert":	{"00000+swarm":"Holla from 3"},
+"/Text#Text1!1_Mpg+3.remove":	{"1_MpV04+3":true,"1_MpV05+3":true,"1_MpV06+3":true,"1_MpV07+3":true,"1_MpV08+3":true,"1_MpV09+3":true,"1_MpV0A+3":true,"1_MpV0B+3":true,"1_MpV0C+3":true,"1_MpV0D+3":true,"1_MpV0E+3":true,"1_MpV0F+3":true},
+"/Text#Text1!1_Mpg01+3.insert":	{"00000+swarm":"LLLO"},
+"/Text#Text1!1_MrY+3.insert":	{"1_Mpg04+3":"ff"},
+"/Text#Text1!1_Msm03+1.remove":	{"1_Mpg01+3":true,"1_Mpg02+3":true,"1_Mpg03+3":true,"1_Mpg04+3":true,"1_MrY+3":true,"1_MrY01+3":true},
+"/Text#Text1!1_Msm04+1.insert":	{"00000+swarm":"Hello"}
