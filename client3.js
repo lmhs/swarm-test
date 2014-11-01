@@ -9,6 +9,10 @@ window.onload = function() {
 		textArea.value = text.text;
 	}
 
+	textArea.oninput = function() {
+		text.set(this.value);
+	}
+
 	// 1. create local Host
 	var swarmHost = new Swarm.Host('90');
 
