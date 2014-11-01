@@ -6,8 +6,6 @@ var ws_lib = require('ws');
 // npm install swarm
 var Swarm = require('swarm');
 
-var Mouse = require('./Mouse.js'); // see the model definition above
-
 var Text = require('swarm/lib/Text');
 
 // use file storage
@@ -31,6 +29,8 @@ var wsServer = new ws_lib.Server({ server: httpServer });
 
 // accept incoming WebSockets connections
 wsServer.on('connection', function (ws) {
-    console.log('new incoming WebSocket connection');
-    swarmHost.accept(new Swarm.EinarosWSStream(ws), { delay: 50 });
+		var temp = new Swarm.EinarosWSStream(ws);
+		console.log(temp);
+    swarmHost.accept(temp, { delay: 50 });
+    console.log(swarmHost);
 });

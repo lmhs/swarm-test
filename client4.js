@@ -5,7 +5,7 @@ window.onload = function() {
 	var textArea = document.getElementById('text');
 	var swarmHost = new Swarm.Host(login);
 
-	window.text = new Text('TextArea');
+	window.text = new Text('TextArea2');
 
 	function listenText() {
 		textArea.value = text.text;
