@@ -1,40 +1,22 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 window.onload = function() {
-
 	var login = prompt('Введите логин');
-
 	var Swarm = require('swarm');
-	// var Mouse = require('./Mouse.js');
 	var Text = require('swarm/lib/Text');
-
 	var textArea = document.getElementById('text');
+	var swarmHost = new Swarm.Host(login);
+
+	window.text = new Text('TextArea');
 
 	function listenText() {
 		textArea.value = text.text;
 	}
 
+	swarmHost.connect('ws://80.240.136.40:8000');
+
 	textArea.oninput = function() {
 		text.set(this.value);
 	}
-
-	// 1. create local Host
-	var swarmHost = new Swarm.Host(login);
-
-	// 2. connect to your server
-	swarmHost.connect('ws://80.240.136.40:8000');
-
-	// 3.a. create an object
-	// var someMouse = new Mouse();
-	// OR swarmHost.get('/Mouse');
-	// OR new Mouse({x:1, y:2});
-
-	// 4.a. a locally created object may be touched immediately
-	// someMouse.set({x:1,y:2});
-
-	// 3.b. This object is global (we supply a certain id) so we
-	// may need to wait for its state to arrive from the server
-	// var mickey = new Mouse('Mickey');
-	window.text = new Text('TextArea');
 
 	text.on('init', listenText);
 
@@ -48,22 +30,6 @@ window.onload = function() {
 		listenText();
 	})
 }
-
-// // 4.b. ...wait for the state to arrive
-// mickey.on('init', function () {
-//     // ...so we may touch it finally.
-//     mickey.set({x: 8, y: 8});
-// });
-
-// // 5. let's subscribe to the object's change events
-// mickey.on(function (spec, val, source) {
-//     // this will be triggered by every state change, be it
-//     // local or remote
-//     console.log('event: ', spec.op(), val);
-//     console.log(mickey);
-//     // outputs:
-//     // set {x:3, y:4}
-// });
 },{"swarm":4,"swarm/lib/Text":17}],2:[function(require,module,exports){
 "use strict";
 
