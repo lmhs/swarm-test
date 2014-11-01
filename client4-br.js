@@ -1,19 +1,10 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Swarm = require('swarm');
-
-var Mouse = Swarm.Model.extend('Mouse', {
-    defaults: {
-        name: 'Mickey',
-        x: 0,
-        y: 0
-    }
-});
-
-module.exports = Mouse; // CommonJS
-},{"swarm":5}],2:[function(require,module,exports){
 window.onload = function() {
+
+	var login = prompt('Введите логин');
+
 	var Swarm = require('swarm');
-	var Mouse = require('./Mouse.js');
+	// var Mouse = require('./Mouse.js');
 	var Text = require('swarm/lib/Text');
 
 	var textArea = document.getElementById('text');
@@ -22,14 +13,18 @@ window.onload = function() {
 		textArea.value = text.text;
 	}
 
+	textArea.oninput = function() {
+		text.set(this.value);
+	}
+
 	// 1. create local Host
-	var swarmHost = new Swarm.Host('5');
+	var swarmHost = new Swarm.Host(login);
 
 	// 2. connect to your server
 	swarmHost.connect('ws://80.240.136.40:8000');
 
 	// 3.a. create an object
-	var someMouse = new Mouse();
+	// var someMouse = new Mouse();
 	// OR swarmHost.get('/Mouse');
 	// OR new Mouse({x:1, y:2});
 
@@ -38,19 +33,19 @@ window.onload = function() {
 
 	// 3.b. This object is global (we supply a certain id) so we
 	// may need to wait for its state to arrive from the server
-	var mickey = new Mouse('Mickey');
-	window.text = new Text('Text1');
+	// var mickey = new Mouse('Mickey');
+	window.text = new Text('TextArea');
 
 	text.on('init', listenText);
 
 	text.on(function(spec, val, source) {
+
 		console.log('****************START EVENT********************');
 		console.log('event: ', spec.op(), val);
-		console.log('****************TEXT********************');
-	  console.log(text);
-	  console.log('****************SOURCE********************');
-	  console.log(source);
-	  listenText();
+		console.log('****************TEXTAREA********************');
+		console.log(text);
+		console.log(swarmHost);
+		listenText();
 	})
 }
 
@@ -69,7 +64,7 @@ window.onload = function() {
 //     // outputs:
 //     // set {x:3, y:4}
 // });
-},{"./Mouse.js":1,"swarm":5,"swarm/lib/Text":18}],3:[function(require,module,exports){
+},{"swarm":4,"swarm/lib/Text":17}],2:[function(require,module,exports){
 "use strict";
 
 
@@ -122,7 +117,7 @@ module.exports = {
         }
     }
 };
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 
 var env = require('./env');
@@ -451,7 +446,7 @@ module.exports = Syncable.extend(Host, {
 
 });
 
-},{"./Pipe":9,"./SecondPreciseClock":12,"./Spec":15,"./Syncable":17,"./env":21}],5:[function(require,module,exports){
+},{"./Pipe":8,"./SecondPreciseClock":11,"./Spec":14,"./Syncable":16,"./env":20}],4:[function(require,module,exports){
 "use strict";
 
 var Swarm = module.exports = window.Swarm = {};
@@ -504,7 +499,7 @@ if (env.isWebKit || env.isGecko) {
     };
 }
 
-},{"./Host":4,"./LevelStorage":6,"./LongSpec":7,"./Model":8,"./Pipe":9,"./ReactMixin":11,"./Set":13,"./SharedWebStorage":14,"./Spec":15,"./Storage":16,"./Syncable":17,"./Vector":19,"./WebSocketStream":20,"./env":21}],6:[function(require,module,exports){
+},{"./Host":3,"./LevelStorage":5,"./LongSpec":6,"./Model":7,"./Pipe":8,"./ReactMixin":10,"./Set":12,"./SharedWebStorage":13,"./Spec":14,"./Storage":15,"./Syncable":16,"./Vector":18,"./WebSocketStream":19,"./env":20}],5:[function(require,module,exports){
 "use strict";
 var env = require('./env');
 var Spec = require('./Spec');
@@ -660,7 +655,7 @@ process.on('uncaughtException', function(err) {
 });
 */
 
-},{"./SecondPreciseClock":12,"./Spec":15,"./Storage":16,"./env":21}],7:[function(require,module,exports){
+},{"./SecondPreciseClock":11,"./Spec":14,"./Storage":15,"./env":20}],6:[function(require,module,exports){
 "use strict";
 
 var Spec = require('./Spec');
@@ -1248,7 +1243,7 @@ LongSpec.prototype.find = function (tok, startIndex) {
 
 module.exports = LongSpec;
 
-},{"./Spec":15}],8:[function(require,module,exports){
+},{"./Spec":14}],7:[function(require,module,exports){
 "use strict";
 
 var Spec = require('./Spec');
@@ -1453,7 +1448,7 @@ module.exports.addReaction = function (methodOrField, fn) {
     }
 };
 
-},{"./Spec":15,"./Syncable":17}],9:[function(require,module,exports){
+},{"./Spec":14,"./Syncable":16}],8:[function(require,module,exports){
 "use strict";
 
 var env = require('./env');
@@ -1725,7 +1720,7 @@ Pipe.prototype.sendBundle = function pS() {
     }
 };
 
-},{"./Spec":15,"./env":21}],10:[function(require,module,exports){
+},{"./Spec":14,"./env":20}],9:[function(require,module,exports){
 "use strict";
 
 function ProxyListener() {
@@ -1763,7 +1758,7 @@ ProxyListener.prototype.off = function (callback) {
 
 module.exports = ProxyListener;
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 var env = require('./env');
@@ -1823,7 +1818,7 @@ module.exports = {
 
 };
 
-},{"./Spec":15,"./env":21}],12:[function(require,module,exports){
+},{"./Spec":14,"./env":20}],11:[function(require,module,exports){
 "use strict";
 
 var Spec = require('./Spec');
@@ -1945,7 +1940,7 @@ SecondPreciseClock.prototype.timestamp2date = function (ts) {
 
 module.exports = SecondPreciseClock;
 
-},{"./Spec":15}],13:[function(require,module,exports){
+},{"./Spec":14}],12:[function(require,module,exports){
 "use strict";
 
 var env = require('./env');
@@ -2111,7 +2106,7 @@ module.exports = Syncable.extend('Set', {
 
 });
 
-},{"./CollectionMethodsMixin":3,"./Model":8,"./ProxyListener":10,"./Spec":15,"./Syncable":17,"./env":21}],14:[function(require,module,exports){
+},{"./CollectionMethodsMixin":2,"./Model":7,"./ProxyListener":9,"./Spec":14,"./Syncable":16,"./env":20}],13:[function(require,module,exports){
 "use strict";
 var Spec = require('./Spec');
 var Storage = require('./Storage');
@@ -2240,7 +2235,7 @@ SharedWebStorage.prototype.readOps = function (ti, callback) {
     callback(null, parsed);
 };
 
-},{"./Spec":15,"./Storage":16}],15:[function(require,module,exports){
+},{"./Spec":14,"./Storage":15}],14:[function(require,module,exports){
 "use strict";
 
 //  S P E C I F I E R
@@ -2493,7 +2488,7 @@ Spec.Map.prototype.toString = function (trim) {
     return ret.join('') || '!0';
 };
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 var Syncable = require('./Syncable');
@@ -2724,7 +2719,7 @@ Storage.prototype.emit = function (spec,value) {
     }
 };
 
-},{"./Syncable":17}],17:[function(require,module,exports){
+},{"./Syncable":16}],16:[function(require,module,exports){
 "use strict";
 
 var Spec = require('./Spec');
@@ -3670,7 +3665,7 @@ Syncable.stateVersionVector = function stateVersionVector(state) {
     return map.toString();
 };
 
-},{"./Spec":15,"./env":21}],18:[function(require,module,exports){
+},{"./Spec":14,"./env":20}],17:[function(require,module,exports){
 "use strict";
 
 var Spec = require('./Spec');
@@ -3828,7 +3823,7 @@ Text.diff = function diff(was, is) {
 
 module.exports = Text;
 
-},{"./Spec":15,"./Syncable":17}],19:[function(require,module,exports){
+},{"./Spec":14,"./Syncable":16}],18:[function(require,module,exports){
 "use strict";
 
 var Spec = require('./Spec');
@@ -4158,7 +4153,7 @@ module.exports = Syncable.extend('Vector', {
 
 });
 
-},{"./CollectionMethodsMixin":3,"./LongSpec":7,"./ProxyListener":10,"./Spec":15,"./Syncable":17}],20:[function(require,module,exports){
+},{"./CollectionMethodsMixin":2,"./LongSpec":6,"./ProxyListener":9,"./Spec":14,"./Syncable":16}],19:[function(require,module,exports){
 "use strict";
 
 var env = require('./env');
@@ -4208,7 +4203,7 @@ WebSocketStream.prototype.write = function (data) {
 env.streams.ws = env.streams.wss = WebSocketStream;
 module.exports = WebSocketStream;
 
-},{"./env":21}],21:[function(require,module,exports){
+},{"./env":20}],20:[function(require,module,exports){
 "use strict";
 
 /** a really simplistic default hash function */
@@ -4264,4 +4259,4 @@ function plain_log(spec, val, object) {
             '@' + ((object && object._host && object._host._id) || ''));
 }
 
-},{}]},{},[2]);
+},{}]},{},[1]);

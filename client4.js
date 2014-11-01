@@ -1,6 +1,9 @@
 window.onload = function() {
+
+	var login = prompt('Введите логин');
+
 	var Swarm = require('swarm');
-	var Mouse = require('./Mouse.js');
+	// var Mouse = require('./Mouse.js');
 	var Text = require('swarm/lib/Text');
 
 	var textArea = document.getElementById('text');
@@ -14,13 +17,13 @@ window.onload = function() {
 	}
 
 	// 1. create local Host
-	var swarmHost = new Swarm.Host('5');
+	var swarmHost = new Swarm.Host(login);
 
 	// 2. connect to your server
 	swarmHost.connect('ws://80.240.136.40:8000');
 
 	// 3.a. create an object
-	var someMouse = new Mouse();
+	// var someMouse = new Mouse();
 	// OR swarmHost.get('/Mouse');
 	// OR new Mouse({x:1, y:2});
 
@@ -29,19 +32,19 @@ window.onload = function() {
 
 	// 3.b. This object is global (we supply a certain id) so we
 	// may need to wait for its state to arrive from the server
-	var mickey = new Mouse('Mickey');
-	window.text = new Text('Text1');
+	// var mickey = new Mouse('Mickey');
+	window.text = new Text('TextArea');
 
 	text.on('init', listenText);
 
 	text.on(function(spec, val, source) {
+
 		console.log('****************START EVENT********************');
 		console.log('event: ', spec.op(), val);
-		console.log('****************TEXT********************');
-	  console.log(text);
-	  console.log('****************SOURCE********************');
-	  console.log(source);
-	  listenText();
+		console.log('****************TEXTAREA********************');
+		console.log(text);
+		console.log(swarmHost);
+		listenText();
 	})
 }
 
